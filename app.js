@@ -27,7 +27,7 @@ document.addEventListener('alpine:init', () => {
    Alpine.data('game', () => {
 
       return {
-         theWord: 'PURRS',
+         theWord: '',
          numGuessesAllowed: 6,
          currentRowIndex: 0,
          state: 'active', // active or over
@@ -43,10 +43,10 @@ document.addEventListener('alpine:init', () => {
          ],
 
          init() {
+            this.theWord = this.easyWordsList[Math.floor(Math.random()*this.easyWordsList.length)];
             this.board = Array.from({length: this.numGuessesAllowed}, () => {
                return Array.from({length: this.wordLength}, () => new Tile());
             });
-            this.theWord = this.easyWordsList[Math.floor(Math.random()*this.easyWordsList.length)];
          },
 
          get allowedGuessesList() {
