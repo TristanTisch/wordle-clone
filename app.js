@@ -27,7 +27,7 @@ document.addEventListener('alpine:init', () => {
    Alpine.data('game', () => {
 
       return {
-         theWord: '',
+         theWord: 'PURRS',
          numGuessesAllowed: 6,
          currentRowIndex: 0,
          state: 'active', // active or over
