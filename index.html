@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Wordle</title>
+    <link rel="stylesheet" href="app.css">
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <script src="app.js"></script>
+
+</head>
+<body>
+<main x-data="game"
+      @keyup.window="onKeyPress($event.key)">
+    <div id="game" >
+        <template x-for="row in board">
+            <div class="row">
+                <template x-for="tile in row">
+                    <div class="tile" :class='tile.status' x-text="tile.letter"></div>
+                </template>
+            </div>
+        </template>
+    </div>
+    <div id="keyboard" @click.stop="$event.target.matches('button') && onKeyPress($event.target.textContent)">
+        <template x-for="keyrow in letters">
+            <div class="keyrow">
+                <template x-for="key in keyrow">
+                    <button :class="findMatchingTile(key)?.status"
+                            class="key"
+                            type="button"
+                            x-text="key"></button>
+                </template>
+            </div>
+        </template>
+    </div>
+    <output x-text="message"></output>
+
+</main>
+</body>
+</html>
